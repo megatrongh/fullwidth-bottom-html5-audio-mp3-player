@@ -1,0 +1,221 @@
+body {
+  margin: 0;
+}
+.holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+.holder .get-it-on-github {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  font-family: 'Roboto';
+  color: #55606e;
+}
+.audio.audio-player {
+  width: 100%;
+  min-width: 300px;
+  height: 80px;
+  box-shadow:  0 -1px 12px 0 rgba(25,25,34,.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  border-radius: 4px;
+  user-select: none;
+  -webkit-user-select: none;
+  background-color: #fff;
+}
+.audio.audio-player .control-handles{
+  display:flex;
+  flex:1;
+  justify-content: center;
+  align-items: center;
+}
+.audio.audio-player .play-pause-btn,.play-prev-btn,.play-next-btn {
+  display: none;
+  cursor: pointer;
+  margin:auto 20px;
+}
+
+.audio.audio-player .loading{
+  flex:1;
+}
+.audio.audio-player .spinner {
+  width: 18px;
+  height: 18px;
+  margin: auto;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/355309/loading.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: spin 0.4s linear infinite;
+}
+.audio.audio-player .slider {
+  flex-grow: 1;
+  background-color: #d8d8d8;
+  cursor: pointer;
+  position: relative;
+}
+
+
+
+.audio.audio-player .slider .progress {
+  background-color: #000000;
+  border-radius: inherit;
+  position: absolute;
+  pointer-events: none;
+}
+.audio.audio-player .slider .progress .pin {
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  background-color: #333;
+  position: absolute;
+  pointer-events: all;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.32);
+  visibility:hidden;
+}
+.audio.audio-player .middle{
+  flex: 3;
+}
+.audio.audio-player .controls {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+  color: #55606e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.audio.audio-player .controls .slider {
+  margin-left: 16px;
+  margin-right: 16px;
+  border-radius: 2px;
+  height: 2px;
+  position:relative;
+}
+
+.audio.audio-player .middle #media-info{
+  height:30px;
+  font-family: 'Roboto', sans-serif;
+  color:#32323d;
+  font-size:14px;
+  
+}
+.audio.audio-player .middle #media-info a{
+  text-decoration:none;
+  color:#32323d;
+  font-size:13px;
+}
+.audio.audio-player .middle #media-info a:hover{
+  text-decoration:underline;
+  color:#32323d;
+}
+.audio.audio-player .controls .time-hint{
+  height: 25px;
+  width: 50px;
+  display: none;
+  position: absolute;
+  z-index: 10;
+  background-color: #000;
+  color: #fff;
+  top: -35px;
+  text-align: center;
+  font-size:10px;
+  line-height:25px;
+}
+.audio.audio-player .controls .slider:hover {
+  height: 4px;
+}
+.audio.audio-player .controls .slider:hover .progress .pin{
+  visibility: visible;
+}
+.audio.audio-player .controls .slider:hover .time-hint{
+  display:block;
+}
+.audio.audio-player .controls .slider .progress {
+  width: 0;
+  height: 100%;
+}
+.audio.audio-player .controls .slider .progress .pin {
+  right: -8px;
+  top: -6px;
+}
+.audio.audio-player .controls span {
+  cursor: default;
+}
+.audio.audio-player .volume {
+  position: relative;
+  flex:1;
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.audio.audio-player .volume .volume-btn {
+  cursor: pointer;
+}
+/* .audio.audio-player .volume .volume-btn.open path {
+  fill: #44bfa3;
+} */
+.audio.audio-player .volume .volume-controls {
+  width: 25px;
+  height: 135px;
+  border-radius: 2px;
+  position: absolute;
+  left: 35px;
+  bottom: 25px;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+}
+.audio.audio-player .volume .volume-controls.hidden {
+  display: none;
+}
+.audio.audio-player .volume .volume-controls .slider {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  width: 5px;
+  border-radius: 3px;
+}
+.audio.audio-player .volume .volume-controls .slider .progress {
+  bottom: 0;
+  height: 100%;
+  width: 5px;
+}
+.audio.audio-player .volume .volume-controls .slider .progress .pin {
+  left: -5px;
+  top: -8px;
+}
+/* .play-pause-btn svg{
+  padding-left:25px;
+}
+.volume-btn svg{
+  padding-right:25px;
+} */
+.current-time,.total-time{
+  font-size:10px;
+  color:#c2c2ca;
+}
+svg, img {
+  display: block;
+  margin:auto;
+}
+html, body {
+  height: 100%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotateZ(0);
+  }
+  to {
+    transform: rotateZ(1turn);
+  }
+}

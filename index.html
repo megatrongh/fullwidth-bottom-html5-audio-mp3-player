@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Audio Player</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">    
+    <link rel="stylesheet" href="audio_player.css" />
+  </head>
+  <body>
+      <button onclick="cs_change_music('music/horse.mp3');">Play horse sournd</button>
+      <button onclick="cs_change_music('music/soundbit.mp3');">Play sound bite</button>
+    <div class="holder">
+      <div class="audio audio-player">
+        <div class="control-handles">
+          <div class="loading">
+            <div class="spinner"></div>
+          </div>
+          <div class="play-prev-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="24"
+              viewBox="0 0 12 12"
+            >
+              <path
+                fill="#dddddd"
+                fill-rule="evenodd"
+                d="M2 5.397V.5a.5.5 0 1 0-1 0v11a.5.5 0 1 0 1 0V6.597L11 12V0L2 5.397z"
+                class="play-prev-icon"
+                id="prevPlay"
+              />
+            </svg>
+          </div>
+          <div class="play-pause-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="24"
+              viewBox="0 0 18 24"
+            >
+              <path
+                fill="#000000"
+                fill-rule="evenodd"
+                d="M18 12L0 24V0"
+                class="play-pause-icon"
+                id="playPause"
+              />
+            </svg>
+          </div>
+          <div class="play-next-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="24"
+              viewBox="0 0 12 12"
+            >
+              <path
+                fill="#dddddd"
+                fill-rule="evenodd"
+                d="M11 .5v11c0 .276-.232.5-.5.5a.503.503 0 0 1-.5-.5V7.08L1.562 11.95A.375.375 0 0 1 1 11.624V.376c0-.29.312-.47.562-.325L10 4.919V.5c0-.276.232-.5.5-.5.276 0 .5.229.5.5z"
+                class="play-next-icon"
+                id="nextPlay"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="middle">
+        <div id="media-info">
+            <a href="">Media title goes here</a> · <a href="">Speaker fullname</a>
+            
+        </div>
+        <div class="controls">
+          <span class="current-time">0:00</span>
+          <div class="slider" data-direction="horizontal" id="media-timeline">
+            <div class="progress">
+              <div class="pin" id="progress-pin" data-method="rewind"></div>
+            </div>
+            <span class="time-hint"></span>
+          </div>
+          <span class="total-time">0:00</span>
+        </div>
+    </div>
+        <div class="volume">
+          <div class="volume-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 30 20"
+            >
+              <path
+                fill="#000000"
+                fill-rule="evenodd"
+                d="M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z"
+                id="speaker"
+              />
+            </svg>
+            <div class="volume-controls hidden">
+              <div class="slider" data-direction="vertical">
+                <div class="progress">
+                  <div
+                    class="pin"
+                    id="volume-pin"
+                    data-method="changeVolume"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="24"
+                viewBox="0 0 12 8"
+              >
+                <path
+                  fill="#dddddd"
+                  fill-rule="evenodd"
+                  d="M8.667 9.214H8V10.5L5.333 8.571V8.25c0-.178.149-.321.334-.321h3c1.104 0 2-.864 2-1.929 0-1.066-.896-1.929-2-1.929h-.334A.327.327 0 0 1 8 3.75v-.643c0-.178.148-.321.333-.321h.334C10.507 2.786 12 4.225 12 6s-1.493 3.214-3.333 3.214zM6.333 4.071h-3c-1.105 0-2 .863-2 1.929 0 1.065.895 1.929 2 1.929h.334c.183 0 .333.143.333.321v.643c0 .177-.15.321-.333.321h-.334C1.493 9.214 0 7.775 0 6s1.493-3.214 3.333-3.214H4V1.5l2.667 1.929v.321c0 .177-.15.321-.334.321z"
+                  id="speaker"
+                />
+              </svg>
+          </div>
+          <div>
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="24"
+                viewBox="0 0 12 8"
+              >
+                <path
+                  fill="#dddddd"
+                  fill-rule="evenodd"
+                  d="M9.333 9.214h-.666C6.826 9.214 5.333 7.775 5.333 6c0-1.066-.894-1.929-2-1.929H.683C.298 4.071 0 3.784 0 3.43c0-.356.298-.643.667-.729.137 0 2.65.01 2.666 0 1.841.086 3.334 1.525 3.334 3.3 0 1.065.896 1.929 2 1.929h3c.185 0 .333.143.333.321v.321L9.333 10.5V9.214zm-.666-5.143c-.367 0-.708.103-1.004.27a4.497 4.497 0 0 0-.672-1.104c.493-.28 1.062-.451 1.709-.537.013.03.51 0 .6 0V1.5L12 3.429v.321a.327.327 0 0 1-.333.321h-3zM3.333 7.93c.369 0 .709-.103 1.004-.27.168.404.4.767.672 1.104-.493.28-1.062.451-1.676.537-.018-.011-2.435 0-2.666 0C.298 9.214 0 8.927 0 8.571c0-.355.298-.642.667-.642h2.666z"
+                  id="speaker"
+                />
+              </svg>
+          </div>
+          <div>
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 30 20"
+              >
+                <path
+                  fill="#dddddd"
+                  fill-rule="evenodd"
+                  d="M14,10 L2,10 L2,12 L14,12 L14,10 Z M14,6 L2,6 L2,8 L14,8 L14,6 Z M18,14 L18,10 L16,10 L16,14 L12,14 L12,16 L16,16 L16,20 L18,20 L18,16 L22,16 L22,14 L18,14 Z M2,16 L10,16 L10,14 L2,14 L2,16 Z"
+                  id="speaker"
+                />
+              </svg>
+          </div>
+        </div>
+
+        <audio crossorigin>
+          <source
+            src="music/soundbit.mp3"
+            type="audio/mpeg"
+          />
+        </audio>
+      </div>
+    </div>
+    <script src="audio_player.js"></script>
+  </body>
+</html>
