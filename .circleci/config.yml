@@ -17,7 +17,7 @@ jobs:
           command: |
             apk add --no-cache py-pip sudo
       - aws-cli/setup:
-          profile-name: default
+          profile-name: $AWS_PROFILE
       - run:
           name: Push docker image
           command: |
