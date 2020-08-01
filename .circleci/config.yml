@@ -20,11 +20,11 @@ jobs:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-region: AWS_DEFAULT_REGION
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-      - run:
-          name: Push docker image
-          command: |
-            eval "$(aws ecr get-login --no-include-email)"
-            docker push $AWS_ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:ci-sha-$CIRCLE_SHA1
+    #   - run:
+    #       name: Push docker image
+    #       command: |
+    #         eval "$(aws ecr get-login --no-include-email)"
+    #         docker push $AWS_ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:ci-sha-$CIRCLE_SHA1
 
   deploy-production:
     docker:
