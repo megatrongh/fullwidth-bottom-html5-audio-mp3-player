@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Push docker image
           command: |
-            eval "$(aws ecr get-login --no-include-email)"
+            eval "$(aws ecr get-login --no-include-email | sed 's|https://||')"
             docker push $AWS_ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:ci-sha-$CIRCLE_SHA1
 
   deploy-production:
