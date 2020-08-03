@@ -17,9 +17,7 @@ jobs:
           command: |
             apk add --no-cache py-pip sudo
       - aws-cli/setup:
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-region: AWS_DEFAULT_REGION
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          profile-name: default
       - run:
           name: Push docker image
           command: |
