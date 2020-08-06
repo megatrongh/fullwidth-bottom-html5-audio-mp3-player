@@ -3,15 +3,14 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.12.2
 jobs:
   build_and_push_image:
-    steps:
-      - aws-ecr/build_and_push_image:
-        region: AWS_DEFAULT_REGION
-        account-url: AWS_ECR_ENDPOINT
-        repo: CIRCLE_PROJECT_REPONAME
-        dockerfile: 'Dockerfile'
-        path: 'docker/'
-        profile-name: 'default'
-        tag: 'example_app:latest'
+    - aws-ecr/build_and_push_image:
+      region: AWS_DEFAULT_REGION
+      account-url: AWS_ECR_ENDPOINT
+      repo: CIRCLE_PROJECT_REPONAME
+      dockerfile: 'Dockerfile'
+      path: 'docker/'
+      profile-name: 'default'
+      tag: 'example_app:latest'
 
   deploy-production:
     docker:
