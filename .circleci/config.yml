@@ -17,8 +17,8 @@ workflows:
     jobs:
       - aws-ecr/build_and_push_image:
         context: org-global
-        region: AWS_DEFAULT_REGION
-        account-url: AWS_ECR_ENDPOINT
+        region: ${AWS_DEFAULT_REGION}
+        account-url: ${AWS_ECR_ENDPOINT}
         repo: CIRCLE_PROJECT_REPONAME
         dockerfile: 'Dockerfile'
         path: 'docker/'
