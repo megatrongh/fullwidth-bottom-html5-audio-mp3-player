@@ -26,10 +26,10 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build: { context: org-global }
+      - build_and_push_image: { context: org-global }
       - deploy-production:
           {
-            requires: [build],
+            requires: [build_and_push_image],
             filters: { branches: { only: [master] } },
             context: org-global,
           }
