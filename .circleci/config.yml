@@ -22,7 +22,7 @@ jobs:
           name: Push docker image
           command: |
             if [ "$DD" == "test" ]; then
-              echo "tested"
+              echo "testedtttok"
             fi
 
   deploy-production:
