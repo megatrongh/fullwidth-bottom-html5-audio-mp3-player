@@ -3,12 +3,12 @@ orbs:
   aws-cli: circleci/aws-cli@1.2.1
 jobs:
   build:
-    executor: aws-cli/default
     docker:
       - image: docker:17.09.0-ce-git
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: Build docker image
           command: |
@@ -17,7 +17,7 @@ jobs:
           name: Install awscli
           command: |
             apk add --no-cache ca-certificates curl gettext py-pip sudo wget
-            pip install awscli
+            pip install awscli==2.0.37
       - aws-cli/setup:
           profile-name: default
       - run:
