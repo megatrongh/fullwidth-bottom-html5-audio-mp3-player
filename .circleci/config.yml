@@ -1,22 +1,17 @@
 version: 2.1
 orbs:
-  aws-cli: circleci/aws-cli@0.1.19
   aws-ecr: circleci/aws-ecr@6.12.2
 jobs:
-  build:
-    docker:
-      - image: docker:17.09.0-ce-git
+  build_and_push_image:
     steps:
-      - checkout
-      - setup_remote_docker
       - aws-ecr/build_and_push_image:
         region: AWS_DEFAULT_REGION
         account-url: AWS_ECR_ENDPOINT
         repo: CIRCLE_PROJECT_REPONAME
-        dockerfile: Dockerfile
-        path: docker/
-        profile-name: default
-        tag: "example_app:latest"
+        dockerfile: 'Dockerfile'
+        path: 'docker/'
+        profile-name: 'default'
+        tag: 'example_app:latest'
 
   deploy-production:
     docker:
