@@ -1,7 +1,29 @@
 version: 2.1
 orbs:
-  aws-ecr: circleci/aws-ecr@6.7.0
+  aws-cli: circleci/aws-cli@0.1.19
 jobs:
+  build:
+    docker:
+      - image: docker:17.09.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build docker image
+          command: |
+            docker build -t $AWS_ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:ci-sha-$CIRCLE_SHA1 -t $AWS_ECR_ENDPOINT/example_app:latest -f docker/Dockerfile .
+      - run:
+          name: Install supplemental packages
+          command: |
+            apk add --no-cache ca-certificates curl gettext py-pip sudo wget
+      - aws-cli/setup:
+          profile-name: default
+      - run:
+          name: Push docker image
+          command: |
+            eval "$(aws ecr get-login --no-include-email)"
+            docker push $AWS_ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:ci-sha-$CIRCLE_SHA1
+
   deploy-production:
     docker:
       - image: silintl/ecs-deploy:latest
@@ -15,20 +37,5 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - aws-ecr/build_and_push_image:
-        context: org-global
-        region: AWS_DEFAULT_REGION
-        aws-access-key-id: AWS_ACCESS_KEY_ID
-        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-        create-repo: true
-        account-url: AWS_ECR_ENDPOINT
-        repo: CIRCLE_PROJECT_REPONAME
-        dockerfile: Dockerfile
-        path: docker/
-        
-      - deploy-production:
-          {
-            requires: [build_and_push_image],
-            filters: { branches: { only: [master] } },
-            context: org-global,
-          }
+      - build: { context: org-global }
+      - deploy-production: { requires: [build], filters: { branches: { only: [master] } }, context: org-global }
