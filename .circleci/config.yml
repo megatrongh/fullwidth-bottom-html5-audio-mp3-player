@@ -18,7 +18,7 @@ jobs:
           name: Install awscli
           command: |
             apk add --no-cache ca-certificates curl gettext py-pip sudo wget
-            pip install awscli==2.0.37
+            pip install awscli
       - aws-cli/setup:
           profile-name: default
       - run:
