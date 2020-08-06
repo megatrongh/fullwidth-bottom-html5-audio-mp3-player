@@ -20,7 +20,7 @@ jobs:
         dockerfile: Dockerfile
         path: docker/
         profile-name: default
-        tag: "$AWS_ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:ci-sha-$CIRCLE_SHA1 $AWS_ECR_ENDPOINT/example_app:latest"
+        tag: "$AWS_ECR_ENDPOINT/example_app:latest"
 
   deploy-production:
     docker:
