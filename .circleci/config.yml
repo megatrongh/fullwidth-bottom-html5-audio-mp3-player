@@ -9,10 +9,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-        name: Install supplemental packages
-        command: |
-          apk add --no-cache ca-certificates curl gettext py-pip sudo wget
       - aws-ecr/build_and_push_image:
         region: AWS_DEFAULT_REGION
         account-url: AWS_ECR_ENDPOINT
