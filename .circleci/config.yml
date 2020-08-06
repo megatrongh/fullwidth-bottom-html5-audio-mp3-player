@@ -22,8 +22,7 @@ workflows:
         repo: CIRCLE_PROJECT_REPONAME
         dockerfile: 'Dockerfile'
         path: 'docker/'
-        profile-name: 'default'
-        tag: example_app:latest
+        profile-name: default
       - deploy-production:
           {
             requires: [build_and_push_image],
