@@ -23,7 +23,7 @@ workflows:
         dockerfile: 'Dockerfile'
         path: 'docker/'
         profile-name: 'default'
-        tag: 'example_app:latest'
+        tag: example_app:latest
       - deploy-production:
           {
             requires: [build_and_push_image],
