@@ -14,6 +14,10 @@ jobs:
           name: Build docker image
           command: |
             docker build -t $AWS_ECR_ENDPOINT/$CIRCLE_PROJECT_REPONAME:ci-sha-$CIRCLE_SHA1 -t $AWS_ECR_ENDPOINT/example_app:latest -f docker/Dockerfile .
+      - run:
+          name: Install awscli
+          command: |
+            apk add --no-cache ca-certificates curl gettext py-pip sudo wget
       - aws-cli/setup:
           profile-name: default
       - run:
