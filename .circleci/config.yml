@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Configure AWS profile
           command: |
-            eval "$(aws configure --profile "default")
+            eval "$(aws configure --profile default)"
       - aws-cli/setup:
           profile-name: default
       - run:
