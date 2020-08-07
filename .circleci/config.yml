@@ -18,7 +18,12 @@ jobs:
           name: Install awscli
           command: |
             apk add --no-cache py-pip sudo
-      - aws-cli/setup
+      - run:
+          name: echo an env
+          command: |
+            echo $AWS_ACCESS_KEY_ID
+      - aws-cli/setup:
+          profile-name: default
       - run:
           name: Push docker image
           command: |
