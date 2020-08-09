@@ -13,9 +13,9 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            docker build -t $AWS_ECR_ENDPOINT:latest -f docker/Dockerfile .
+            docker build -t $AWS_ECR_ENDPOINT/example-app:ci-sha-$CIRCLE_SHA1 -t $AWS_ECR_ENDPOINT/example-app:latest -f docker/Dockerfile .
       - run:
-          name: Install supplemental packages
+          name: Install awscli
           command: |
             apk add --no-cache py-pip sudo
       - aws-cli/setup:
@@ -24,7 +24,7 @@ jobs:
           name: Push docker image
           command: |
             eval "$(aws ecr get-login --no-include-email)"
-            docker push $AWS_ECR_ENDPOINT:latest
+            docker push $AWS_ECR_ENDPOINT/example-app:ci-sha-$CIRCLE_SHA1
 
   deploy-production:
     docker:
@@ -33,7 +33,7 @@ jobs:
       - run:
           name: deploy to ecs
           command: |
-            ecs-deploy --enable-rollback -c example_ecs_cluster -n example_ecs_service -i $AWS_ECR_ENDPOINT:latest -t 900
+            ecs-deploy --enable-rollback -c example_ecs_cluster -n example_ecs_service -i $AWS_ECR_ENDPOINT/example-app:ci-sha-$CIRCLE_SHA1 -t 900
 
 workflows:
   version: 2
