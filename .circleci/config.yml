@@ -28,7 +28,7 @@ jobs:
 
   deploy-production:
     docker:
-      - image: $AWS_ECR_ENDPOINT:latest
+      - image: $AWS_ECR_ENDPOINT/universe/deploy:latest
     steps:
       - run:
           name: deploy to ecs
