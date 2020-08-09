@@ -40,4 +40,4 @@ workflows:
   build-deploy:
     jobs:
       - build: { context: aws }
-      - deploy-production: { requires: [build], filters: { branches: { only: [master] } }, context: org-global }
+      - deploy-production: { requires: [build], filters: { branches: { only: [master] } }, context: aws }
