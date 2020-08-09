@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            docker build -t $AWS_ECR_ENDPOINT:ci-sha-$CIRCLE_SHA1 -t $AWS_ECR_ENDPOINT/example-app:latest -f docker/Dockerfile .
+            docker build -t $AWS_ECR_ENDPOINT:latest -f docker/Dockerfile .
       - run:
           name: Install awscli
           command: |
@@ -24,7 +24,7 @@ jobs:
           name: Push docker image
           command: |
             eval "$(aws ecr get-login --no-include-email)"
-            docker push $AWS_ECR_ENDPOINT:ci-sha-$CIRCLE_SHA1
+            docker push $AWS_ECR_ENDPOINT:latest
 
   deploy-production:
     docker:
