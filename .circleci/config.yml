@@ -15,7 +15,7 @@ jobs:
           command: |
             docker build -t $AWS_ECR_ENDPOINT:latest -f docker/Dockerfile .
       - run:
-          name: Install awscli
+          name: Install supplemental packages
           command: |
             apk add --no-cache py-pip sudo
       - aws-cli/setup:
@@ -28,7 +28,7 @@ jobs:
 
   deploy-production:
     docker:
-      - image: silintl/ecs-deploy:latest
+      - image: $AWS_ECR_ENDPOINT:latest
     steps:
       - run:
           name: deploy to ecs
